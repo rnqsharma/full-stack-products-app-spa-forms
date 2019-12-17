@@ -1,0 +1,73 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+    {{pageTitle}}
+    </div>
+    
+    <div class='panel-body'>
+    <div class='row'>
+    <div class='col-md-2'>Filter by:</div>
+    <div class='col-md-4'>
+    <input type='text' [(ngModel)]='filterText'/> 
+
+    
+    </div>
+    </div>
+    <div class='row'>
+    <div class='col-md-6'>
+    
+    </div>
+    </div>
+    <div class='table-responsive'>
+    <table class='table'>
+    <thead>
+    <tr>
+    <th>
+    <button class='btn btn-primary' (click)='showOrHideImage()'>
+        
+    {{showImageName}}
+    </button>
+    </th>
+    <th>Product</th>
+    <th>Code</th>
+    <th>Available</th>
+    <th>Price</th>
+    <th>5 Star Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor='let product of filteredList'>
+    <td *ngIf='showImage'>
+    <img 
+    [src]='product.imageUrl'
+    [title]='product.productName' 
+    [style.width.px]='imageWidth'
+    [style.margin.px]='imageMargin'
+    >
+    </td>
+    <td>
+    <a [routerLink]="['/products', product.productId]">
+    {{ product.productName }}
+    </a></td>
+    <td>{{ product.productCode }}</td>
+    <td>{{ product.releaseDate }}</td>
+    <td>{{ product.price }}</td>
+    <td>
+    <app-star-rating [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></app-star-rating>
+    </td>
+    <td>
+            <button class="btn btn-outline-primary btn-sm"
+            [routerLink]="['/products', product.productId, 'edit']">
+            Edit
+            </button>
+            </td>
+
+    </tr>
+    </tbody>
+    </table>
+
+    
+    
+    </div>
+    </div>
+    </div>
